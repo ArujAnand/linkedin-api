@@ -275,7 +275,15 @@ poetry run black .
 
 #### I keep getting a `CHALLENGE`
 
-Linkedin will throw you a curve ball in the form of a Challenge URL. We currently don't handle this, and so you're kinda screwed. We think it could be only IP-based (i.e. logging in from different location). Your best chance at resolution is to log out and log back in on your browser.
+Linkedin will throw you a curve ball in the form of a Challenge URL. We currently handle this by bypassing `CHALLENGE` with cookies from browser.
+
+1. Enable Challenge Handling:
+Set the `challenge_prompt_enabled` flag to `True` (by default set to `False`)
+
+2. Use Session Cookies:
+Copy your JSESSIONID and li_at cookies from a logged-in LinkedIn browser session and paste them when prompted.
+
+`challenge_prompt_enabled` flag which is by default set to `False`. To bypass `CHALLENGE`, change `challenge_prompt_enabled` to `True` and copy Linkedin JSESSIONID and li_at cookies taken from a browser login.
 
 **Known reasons for Challenge** include:
 

@@ -49,7 +49,13 @@ class Client(object):
     }
 
     def __init__(
-        self, *, debug=False, refresh_cookies=False, proxies={}, cookies_dir: str = "", challenge_prompt_enabled=False
+        self,
+        *,
+        debug=False,
+        refresh_cookies=False,
+        proxies={},
+        cookies_dir: str = "",
+        challenge_prompt_enabled=False,
     ):
         self.session = requests.session()
         self.session.proxies.update(proxies)
@@ -59,7 +65,7 @@ class Client(object):
         self.metadata = {}
         self._use_cookie_cache = not refresh_cookies
         self._cookie_repository = CookieRepository(cookies_dir=cookies_dir)
-        self.challenge_prompt_enabled=challenge_prompt_enabled
+        self.challenge_prompt_enabled = challenge_prompt_enabled
 
         logging.basicConfig(level=logging.DEBUG if debug else logging.INFO)
 
@@ -103,8 +109,10 @@ class Client(object):
             self.logger.info("Successfully authenticated using cookies.")
         except Exception as e:
             self.logger.error(f"Cookie-based authentication failed: {str(e)}")
-            raise UnauthorizedException("Failed to authenticate using provided cookies.")
-        
+            raise UnauthorizedException(
+                "Failed to authenticate using provided cookies."
+            )
+
     @property
     def cookies(self):
         return self.session.cookies
@@ -118,13 +126,17 @@ class Client(object):
                 self._set_session_cookies(cookies)
                 self._fetch_metadata()
                 return
-        
+
         try:
             self._do_authentication_request(username, password)
         except ChallengeException:
             if self.challenge_prompt_enabled:
-                self.logger.warning("ChallengeException encountered during authentication.")
-                self.jsessionid = input("Enter your JSESSIONID cookie from the browser: ")
+                self.logger.warning(
+                    "ChallengeException encountered during authentication."
+                )
+                self.jsessionid = input(
+                    "Enter your JSESSIONID cookie from the browser: "
+                )
                 self.li_at = input("Enter your li_at cookie from the browser: ")
                 try:
                     self.authenticate_with_cookies(self.jsessionid, self.li_at)

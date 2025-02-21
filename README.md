@@ -281,9 +281,7 @@ Linkedin will throw you a curve ball in the form of a Challenge URL. We currentl
 Set the `challenge_prompt_enabled` flag to `True` (by default set to `False`)
 
 2. Use Session Cookies:
-Copy your JSESSIONID and li_at cookies from a logged-in LinkedIn browser session and paste them when prompted.
-
-`challenge_prompt_enabled` flag which is by default set to `False`. To bypass `CHALLENGE`, change `challenge_prompt_enabled` to `True` and copy Linkedin JSESSIONID and li_at cookies taken from a browser login.
+Copy your `JSESSIONID` and `li_at` cookies from a logged-in LinkedIn browser session and paste them when prompted.
 
 **Known reasons for Challenge** include:
 

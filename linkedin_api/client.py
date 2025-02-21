@@ -49,7 +49,7 @@ class Client(object):
     }
 
     def __init__(
-        self, *, debug=False, refresh_cookies=False, proxies={}, cookies_dir: str = "", challenge_prompt_enabled=False, jsessionid="", li_at=""
+        self, *, debug=False, refresh_cookies=False, proxies={}, cookies_dir: str = "", challenge_prompt_enabled=False
     ):
         self.session = requests.session()
         self.session.proxies.update(proxies)
@@ -60,8 +60,6 @@ class Client(object):
         self._use_cookie_cache = not refresh_cookies
         self._cookie_repository = CookieRepository(cookies_dir=cookies_dir)
         self.challenge_prompt_enabled=challenge_prompt_enabled
-        self.jsessionid=jsessionid
-        self.li_at=li_at
 
         logging.basicConfig(level=logging.DEBUG if debug else logging.INFO)
 

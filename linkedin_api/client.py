@@ -124,9 +124,8 @@ class Client(object):
         except ChallengeException:
             if self.challenge_prompt_enabled:
                 self.logger.warning("ChallengeException encountered during authentication.")
-                if(self.jsessionid=="" and self.li_at==""):
-                    self.jsessionid = input("Enter your JSESSIONID cookie from the browser: ")
-                    self.li_at = input("Enter your li_at cookie from the browser: ")
+                self.jsessionid = input("Enter your JSESSIONID cookie from the browser: ")
+                self.li_at = input("Enter your li_at cookie from the browser: ")
                 try:
                     self.authenticate_with_cookies(self.jsessionid, self.li_at)
                 except UnauthorizedException:
